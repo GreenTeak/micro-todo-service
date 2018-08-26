@@ -3,12 +3,10 @@ package com.thoughtworks.training.todoserver.controller;
 import com.google.common.net.HttpHeaders;
 import com.thoughtworks.training.todoserver.languageCheck.SpellCheckerService;
 import com.thoughtworks.training.todoserver.model.Todo;
-import com.thoughtworks.training.todoserver.model.User;
+
 import com.thoughtworks.training.todoserver.security.TodoFilter;
 import com.thoughtworks.training.todoserver.server.TodoServer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,8 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
-import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -44,13 +40,14 @@ public class TodoAPI {
     }
 
     @PostMapping("/todos")
-    public void createOne(@RequestBody Todo todo) {
+    public String createOne(@RequestBody Todo todo) {
 
         Integer id = todoFilter.requestId();
 
         todolistSerive.create(todo, id);
-    }
 
+        return todo.getText();
+    }
     @DeleteMapping("/todos/{id}")
     public void delete(@PathVariable Integer id) {
         todolistSerive.delete(id);

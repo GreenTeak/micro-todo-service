@@ -53,8 +53,8 @@ public class TodoFilter extends OncePerRequestFilter {
                                             null, Collections.emptyList()));
 
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (RuntimeException e) {
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, String.format(" gateway Auntntication failed"));
             }
         }
         filterChain.doFilter(request, response);

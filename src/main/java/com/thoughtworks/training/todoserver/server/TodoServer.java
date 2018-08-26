@@ -52,7 +52,7 @@ public class TodoServer {
 
        // spellCheckerService.check(todos);
         //spellChecker.check(todos, Todo::getText,Todo::setSuggestion);
-        //spellCheckerService.check(todos);
+        spellCheckerService.check(todos);
         //spellCheckerService.checkFallback(todos);
         return todos;
     }
